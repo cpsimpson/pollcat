@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+{% if form.errors %}
+<p>{{ form.errors }}</p>
+{% endif %}
+
+
+    {% if user.is_authenticated %}
+
+        <p>Welcome, {{ user.username }}  <a href="/accounts/logout">[logout]</a></p>
+    {% else %}
+
+         <form method="POST" action='{% url "registration_register" %}'>
+        {% csrf_token %}
+        {% for field in form %}
+            <fieldset>
+            {{ field.label_tag }}
+            <div>
+            <div class="widget">
+            {{ field }}
+            </div>
+            {{ field.errors }}
+            </div>
+            </fieldset>
+        {% endfor %}
+
+        <input type="submit" value="Sign Up" class="btn btn-primary"/>
+    </form>
+    {% endif %}
+{% endblock %}
