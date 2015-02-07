@@ -1,2 +1,6 @@
 Django==1.7.4
 django-registration-redux==1.1
+
+boto==2.2.2
+django-ses==0.4.1
+django-storages==1.1.4
