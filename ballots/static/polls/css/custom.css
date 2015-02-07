@@ -1,0 +1,26 @@
+h1 {
+    color: darkgoldenrod;
+}
+
+.poll-form {
+    padding-top: 2em;
+    border-top: 3px double darkgoldenrod;
+}
+
+.category-name {
+    color: darkgoldenrod;
+}
+
+.category-option {
+    padding-top: 1em;
+}
+
+.vote-button{
+    margin-top: 2em;
+}
+
+.poll-list {
+    list-style-type: none;
+    padding-top: 1em;
+    font-size: 2em;
+}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    {% if user.is_authenticated %}
+        <div class="lead">
+            <p>Welcome to Poll Cat.</p>
+
+            <p>We hope you enjoy your polling experience. If you have any
+                feedback as you use the site please send it to <a
+                        href="mailto:feedback@pollcat.ca">feedback@pollcat.ca</a>
+            </p>
+
+        </div>
+    {% else %}
+
+        <div class="jumbotron">
+            <div class="panel-group" id="accordion" role="tablist"
+                 aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseOne" aria-expanded="true"
+                               aria-controls="collapseOne">
+                                Log In
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in"
+                         role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            {% include 'registration/_login_form.html' with form=login_form %}
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" data-toggle="collapse"
+                               data-parent="#accordion" href="#collapseTwo"
+                               aria-expanded="false" aria-controls="collapseTwo">
+                                Register
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse"
+                         role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            {% include 'registration/_registration_form.html' with form=registration_form %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    {% endif %}
+{% endblock %}

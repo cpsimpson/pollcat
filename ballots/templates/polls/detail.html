@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'polls/css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1>{{ poll.name }}</h1>
+<div class="poll-description">{{ poll.description|safe }}</div>
+
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' poll.slug %}" method="post" class="poll-form">
+{% csrf_token %}
+{% for category in poll.category_set.all %}
+    <div class="row">
+        <div class="col-xs-5">
+            <div class="category-name">{{ category.name }}</div>
+            {% for choice in category.items.all %}
+                <div class="category-option">
+                    <div class="row">
+                        <div class="col-xs-1">
+                            <input type="radio" name="{{ category.slug }}" id="{{ category.slug }}_{{ forloop.counter }}" value="{{ choice.id }}" />
+                        </div>
+                        <div class="col-xs-11">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <label for="{{ category.slug }}_{{ forloop.counter }}" class="option-name">{{ choice.name }}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <span class="option-description">{{ choice.description }}</span>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}
+ <div class="row">
+        <div class="col-xs-offset-2 col-xs-2">
+            <input type="submit" class="vote-button btn btn-default" value="Vote!" />
+        </div>
+</div>
+</form>
+
+{% endblock %}

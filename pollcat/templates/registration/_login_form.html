@@ -1,0 +1,22 @@
+<form class="form-signin" method="post"
+             action="{% url 'django.contrib.auth.views.login' %}">
+{% csrf_token %}
+
+<label for="{{ form.username.id_for_label }}" class="sr-only">Username</label>
+<input type="text" id="{{ form.username.id_for_label }}"
+       class="form-control"
+       placeholder="Username"
+       name="{{ form.username.name }}"
+       required autofocus>
+<label for="{{ form.password.id_for_label }}" class="sr-only">Password</label>
+<input type="password" id="{{ form.password.id_for_label }}"
+       class="form-control"
+       placeholder="Password"
+       name="{{ form.password.name }}"
+       required>
+
+<button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Sign in</button>
+{#<input type="hidden" name="next" value="/" />#}
+<div class="pull-right"><small><a href="{% url 'django.contrib.auth.views.password_reset' %}">Forgot your password?</a></small></div>
+
+</form>
