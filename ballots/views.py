@@ -21,7 +21,6 @@ class PollIndexView(LoginRequiredMixin, generic.ListView):
         return Poll.objects.order_by('-id')[:5]
 
 
-
 class PollDetailView(LoginRequiredMixin, generic.DetailView):
     model = Poll
     template_name = 'polls/detail.html'
