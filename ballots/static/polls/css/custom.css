@@ -3,7 +3,7 @@ h1 {
 }
 
 .poll-form {
-    padding-top: 2em;
+    padding-bottom: 2em;
     border-top: 3px double darkgoldenrod;
 }
 
@@ -33,3 +33,4 @@ h1 {
 .user-details-field input {
     width: 80%
 }
+
