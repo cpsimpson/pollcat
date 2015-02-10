@@ -85,5 +85,9 @@ def vote(request, slug):
                               'error_message': "You didn't select a choice.",
                               })
 
-    return HttpResponseRedirect(reverse('polls:results', args=(poll.slug,)))
+    return HttpResponseRedirect(reverse('polls:thanks', args=(poll.slug,)))
 
+
+class ThanksView(generic.DetailView):
+    model = Poll
+    template_name = 'polls/thanks.html'

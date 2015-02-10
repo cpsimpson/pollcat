@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url(r'^(?P<slug>\w+)/$', views.PollDetailView.as_view(), name='detail'),
     url(r'^(?P<slug>\w+)/results/$', views.PollResultsView.as_view(), name='results'),
     url(r'^(?P<slug>\w+)/vote/$', views.vote, name='vote'),
+    url(r'^(?P<slug>\w+)/thanks/$', views.ThanksView.as_view(), name='thanks'),
 )
