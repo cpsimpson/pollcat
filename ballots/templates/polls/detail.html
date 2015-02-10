@@ -45,10 +45,22 @@
         </div>
     </div>
 {% endfor %}
+<div class="row">
+    <div class="col-xs-5">
+    <label for="id_username">Name: </label>
+        <input type="text" name="username" id="id_username" value="{% if user.is_authenticated %}{{ user.username }}{% endif %}" required="true">
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-5">
+        <label for="id_email">Email: </label>
+        <input type="email" name="email" id="id_email" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" required="true">
+    </div>
+</div>
  <div class="row">
-        <div class="col-xs-offset-2 col-xs-2">
-            <input type="submit" class="vote-button btn btn-default" value="Vote!" />
-        </div>
+    <div class="col-xs-offset-2 col-xs-2">
+        <input type="submit" class="vote-button btn btn-default" value="Vote!" />
+    </div>
 </div>
 </form>
 
