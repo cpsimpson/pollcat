@@ -38,14 +38,18 @@ class PollResultsView(LoginRequiredMixin, generic.DetailView):
 def create_user_from_poll(request):
     username = request.POST['username']
     email = request.POST['email']
-    password = UserModel().objects.make_random_password()
-    UserModel().objects.create_user(username, email, password)
 
-    new_user = authenticate(username=username, password=password)
-    login(request, new_user)
-    signals.user_registered.send(sender=None,
-                                 user=new_user,
-                                 request=request)
+    try:
+        new_user = UserModel().objects.get_by_natural_key(username)
+    except:
+        password = UserModel().objects.make_random_password()
+        UserModel().objects.create_user(username, email, password)
+
+        new_user = authenticate(username=username, password=password)
+        login(request, new_user)
+        signals.user_registered.send(sender=None,
+                                     user=new_user,
+                                     request=request)
 
     return new_user
 
