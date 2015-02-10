@@ -45,13 +45,13 @@
         </div>
     </div>
 {% endfor %}
-<div class="row">
+<div class="row user-details-field">
     <div class="col-xs-5">
     <label for="id_username">Name: </label>
         <input type="text" name="username" id="id_username" value="{% if user.is_authenticated %}{{ user.username }}{% endif %}" required="true">
     </div>
 </div>
-<div class="row">
+<div class="row user-details-field">
     <div class="col-xs-5">
         <label for="id_email">Email: </label>
         <input type="email" name="email" id="id_email" value="{% if user.is_authenticated %}{{ user.email }}{% endif %}" required="true">
