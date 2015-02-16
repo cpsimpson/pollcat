@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block extra_styles %}
+    <link rel="stylesheet" href="{% static 'polls/css/custom.css' %}">
+{% endblock %}
+
+{% block content %}
+    {% for winner in winners %}
+        {{ winner.person }} - {{ winner.score }} Correct
+
+        {% for vote in winner.vote_set.all %}
+            <div class="{% if vote.matches_answer %}correct{% else %}wrong{% endif %}">
+            {{ vote.category }} - {{ vote.item }}
+            </div>
+        {% endfor %}
+        <br/>
+    {% endfor %}
+{% endblock %}

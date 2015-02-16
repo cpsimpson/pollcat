@@ -34,3 +34,10 @@ h1 {
     width: 80%
 }
 
+.correct {
+    color: green;
+}
+
+.wrong {
+    color: red;
+}
