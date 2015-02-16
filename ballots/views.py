@@ -76,7 +76,7 @@ def vote(request, slug):
     if request.user.is_anonymous():
         user = create_user_from_poll(request)
 
-    ballot = Ballot(person=user)
+    ballot = Ballot(person=user, poll=poll)
     ballot.save()
 
     for key, value in request.POST.items():
