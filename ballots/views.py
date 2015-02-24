@@ -113,14 +113,13 @@ class WinnerView(generic.TemplateView):
         # context['entries'] = entries
 
         winners = []
-        count = 0
+        top_scores = set()
         for entry in entries:
-            if count < 3:
-                count += 1
+            if len(top_scores) < 3:
+                top_scores.add(entry.score())
                 winners.append(entry)
             else:
                 break
-
 
         context['winners'] = winners
 
