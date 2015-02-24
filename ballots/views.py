@@ -30,27 +30,19 @@ class PollDetailView(generic.DetailView):
     template_name = 'polls/detail.html'
 
 
-class PollResultsView(LoginRequiredMixin, generic.DetailView):
+class PollResultsView(generic.DetailView):
     model = Poll
     template_name = 'polls/results.html'
 
     def get_context_data(self, **kwargs):
         poll = kwargs["object"]
-        # poll = Poll.objects.get(slug=poll_slug)
         context = super(PollResultsView, self).get_context_data(**kwargs)
 
         ballots = Ballot.objects.filter(poll=poll, accepted=True)
         context['count'] = len(ballots.all())
 
-        # results = {}
-        # for category in poll.category_set.all():
-        #     categories = {}
-        #     for item in category.items.all():
-        #         items = {}
-        #         categories[category]
-
-
-
+        entries = sorted(ballots, key=lambda x: x.score(), reverse=True)
+        context['entries'] = entries
 
         return context
 
@@ -115,24 +107,20 @@ class WinnerView(generic.TemplateView):
         poll = Poll.objects.get(slug=poll_slug)
         context = super(WinnerView, self).get_context_data(**kwargs)
 
-
-
-        max_score = 0
-        winners = []
-
-        ballots = Ballot.objects.filter(poll=poll)
+        ballots = Ballot.objects.filter(poll=poll, accepted=True)
 
         entries = sorted(ballots, key=lambda x: x.score(), reverse=True)
-        context['entries'] = entries
+        # context['entries'] = entries
 
+        winners = []
+        count = 0
+        for entry in entries:
+            if count < 3:
+                count += 1
+                winners.append(entry)
+            else:
+                break
 
-        for ballot in ballots:
-            current_score = ballot.score()
-            if current_score > max_score:
-                max_score = current_score
-                winners = [ballot]
-            elif current_score == max_score:
-                winners.append(ballot)
 
         context['winners'] = winners
 

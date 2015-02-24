@@ -7,7 +7,18 @@
 {% endblock %}
 
 {% block content %}
-    <p>Thanks for voting.</p>
+    Entries: {{ count }} <br/>
 
-    Entries: {{ count }}
+    {% for winner in entries %}
+        {% if winner.accepted %}
+        {{ winner.person }} - {{ winner.score }} Correct
+
+        {% for vote in winner.vote_set.all %}
+            <div class="{% if vote.matches_answer %}correct{% else %}wrong{% endif %}">
+            {{ vote.category }} - {{ vote.item }}
+            </div>
+        {% endfor %}
+        <br/>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
