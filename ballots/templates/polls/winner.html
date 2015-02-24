@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block content %}
-    {% for winner in winners %}
+    {% for winner in entries %}
+        {% if winner.accepted %}
         {{ winner.person }} - {{ winner.score }} Correct
 
         {% for vote in winner.vote_set.all %}
@@ -16,5 +17,6 @@
             </div>
         {% endfor %}
         <br/>
+        {% endif %}
     {% endfor %}
 {% endblock %}

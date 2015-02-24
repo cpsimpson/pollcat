@@ -115,10 +115,17 @@ class WinnerView(generic.TemplateView):
         poll = Poll.objects.get(slug=poll_slug)
         context = super(WinnerView, self).get_context_data(**kwargs)
 
+
+
         max_score = 0
         winners = []
 
         ballots = Ballot.objects.filter(poll=poll)
+
+        entries = sorted(ballots, key=lambda x: x.score(), reverse=True)
+        context['entries'] = entries
+
+
         for ballot in ballots:
             current_score = ballot.score()
             if current_score > max_score:
